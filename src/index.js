@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from './layouts/App';
+import { createBrowserHistory } from "history";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
+
 import * as serviceWorker from './serviceWorker';
 
+const hist = createBrowserHistory();
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router history={hist}>
+  <Switch>
+    <Route path="/feed" component={App} />
+    {/* <Redirect from="/" to="/feed" /> */}
+  </Switch>
+</Router>,
   document.getElementById('root')
 );
 
