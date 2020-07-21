@@ -3,7 +3,8 @@ import { Router, Route, Switch, Redirect } from "react-router-dom";
 import routes from "../routes.js";
 // @material-ui/core components
 import { createBrowserHistory } from "history";
-
+import  Footer  from "../components/Footer/Footer.js";
+import  Navbar  from "../components/Navbar/Navbar.js";
 const hist = createBrowserHistory();
 
 const switchRoutes = (
@@ -22,7 +23,9 @@ const switchRoutes = (
 export default function Admin({ ...rest }) {
   return (
     <div>
+      <Navbar />
       <div>{switchRoutes}</div>
+      <Footer />
     </div>
   );
 }

@@ -7,7 +7,7 @@ export default function NotFound() {
             
             <h1> 404!</h1>
             <h3>This page is not found</h3>
-            {/* <Link to="/feed" >Back to home page</Link> */}
+            <Link to="/feeds" >Back to home page</Link>
         </div>
     )
 }
