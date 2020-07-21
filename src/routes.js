@@ -7,6 +7,7 @@ import Person from "@material-ui/icons/Person";
 // core components/views for Admin layout
 import FeedPage from "./views/Feed/Feed.js";
 import SettingPage from "./views/Setting/Setting.js";
+import NotFound from "./views/notfound/NotFound.js";
 
 const dashboardRoutes = [
   {
@@ -14,16 +15,19 @@ const dashboardRoutes = [
     name: "Feeds",
     icon: Dashboard,
     component: FeedPage,
-    layout: "/feed",
   },
   {
     path: "/setting",
     name: "Setting",
     icon: Person,
     component: SettingPage,
-    layout: "/setting",
   },
-
+  {
+    path: "/notfound",
+    name: "notfound",
+    icon: Person,
+    component: NotFound,
+  },
 ];
 
 export default dashboardRoutes;

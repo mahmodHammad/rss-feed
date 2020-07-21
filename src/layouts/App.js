@@ -1,20 +1,20 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 import routes from "../routes.js";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { createBrowserHistory } from "history";
+
+const hist = createBrowserHistory();
 
 const switchRoutes = (
-  <Switch>
-    {routes.map((prop, key) => {
-      if (prop.layout === "/feed") {
-        return (
-          <Route path={prop.layout} component={prop.component} key={key} />
-        );
-      }
-      return null;
-    })}
-  </Switch>
+  <Router history={hist}>
+    <Switch>
+      {routes.map((prop, key) => (
+        <Route path={prop.path} component={prop.component} key={key} />
+      ))}
+      <Redirect from="/" to="/notfound" />
+    </Switch>
+  </Router>
 );
 
 // const useStyles = makeStyles(styles);

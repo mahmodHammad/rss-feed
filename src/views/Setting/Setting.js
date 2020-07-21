@@ -4,6 +4,11 @@ export default function Setting() {
     return (
         <div>
             Settings
+            Settings
+            Settings
+            Settings
+            Settings
+            Settings
         </div>
     )
 }
