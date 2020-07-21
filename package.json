@@ -8,7 +8,16 @@
     "@testing-library/user-event": "^7.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-swipeable-views": "0.13.9",
+    "rss-parser": "^3.8.0",
+    "react-router-dom": "5.2.0",
+    "@material-ui/core": "4.10.0",
+    "@material-ui/icons": "4.9.1",
+    "classnames": "2.2.6",
+    "history": "4.10.1",
+    "perfect-scrollbar": "1.5.0",
+    "prop-types": "15.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
