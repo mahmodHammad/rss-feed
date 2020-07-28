@@ -10,8 +10,7 @@ import Hidden from "@material-ui/core/Hidden";
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
 // core components
-// import RTLNavbarLinks from "./RTLNavbarLinks.js";
-// import AdminNavbarLinks from "./AdminNavbarLinks.js";
+import AdminNavbarLinks from "./NavbarItems";
 
 import Button from "../../components/CustomButtons/Button.js";
 // import styles from "../../assets/jss/components/NavbarStyle.js";
@@ -45,7 +44,8 @@ const styles = () => ({
         padding: "10px 0",
         transition: "all 150ms ease 0s",
         minHeight: "50px",
-        display: "block"
+        display: "block",
+        marginBottom:50
     },
     container: {
         ...container,
@@ -100,37 +100,46 @@ const styles = () => ({
 
 
 const useStyles = makeStyles(styles);
-
 export default function Header(props) {
     const classes = useStyles();
-
+    function makeBrand() {
+      var name= "Mahmoud Hammad";
+    
+      return name;
+    }
     const { color } = props;
     const appBarClasses = classNames({
-        [" " + classes[color]]: color
+      [" " + classes[color]]: color
     });
     return (
-        <AppBar className={classes.appBar + appBarClasses}>
-            <Toolbar className={classes.container}>
-                <div className={classes.flex}>
-                    {/* Here we create navbar brand, based on route name */}
-
-                    <Button color="transparent" href="#" className={classes.title}>
-                        {props.name}
-                    </Button>
-                </div>
-                {/* <Hidden smDown implementation="css">
-          {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
-        </Hidden> */}
-                <Hidden mdUp implementation="css">
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={props.handleDrawerToggle}
-                    >
-                        <Menu />
-                    </IconButton>
-                </Hidden>
-            </Toolbar>
-        </AppBar>
+      <AppBar className={classes.appBar + appBarClasses}>
+        <Toolbar className={classes.container}>
+          <div className={classes.flex}>
+            {/* Here we create navbar brand, based on route name */}
+            <Button color="transparent" href="#" className={classes.title}>
+              {makeBrand()}
+            </Button>
+          </div>
+          <Hidden smDown implementation="css">
+            <AdminNavbarLinks />
+          </Hidden>
+          <Hidden mdUp implementation="css">
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={props.handleDrawerToggle}
+            >
+              <Menu />
+            </IconButton>
+          </Hidden>
+        </Toolbar>
+      </AppBar>
     );
-}
+  }
+
+  Header.propTypes = {
+    color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
+    handleDrawerToggle: PropTypes.func,
+    routes: PropTypes.arrayOf(PropTypes.object)
+  };
+  

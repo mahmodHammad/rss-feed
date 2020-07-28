@@ -5,12 +5,22 @@ import routes from "../routes.js";
 import { createBrowserHistory } from "history";
 import Footer from "../components/Footer/Footer.js";
 import Navbar from "../components/Navbar/Navbar.js";
+import FeedDisplayer from "../components/Feed/FeedDisplayer";
 import RSSParser from "rss-parser";
+import { makeStyles } from "@material-ui/core/styles";
 const hist = createBrowserHistory();
 
 let parser = new RSSParser();
 
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+
+
+
+const styles = () => ({
+  root: {
+    paddingTop: 80
+  }
+})
 
 const switchRoutes = (
   <Router history={hist}>
@@ -33,7 +43,11 @@ function getfeed(url) {
     });
   });
 }
+const useStyles = makeStyles(styles);
+
 export default function Admin({ ...rest }) {
+  const classes = useStyles();
+
   const [providers, setproviders] = useState([
     "https://www.reddit.com/.rss",
     "http://joeroganexp.joerogan.libsynpro.com/rss",
@@ -49,20 +63,11 @@ export default function Admin({ ...rest }) {
 
   return (
     <div>
-      <Navbar color="warning" />
-      <div>{switchRoutes}</div>
-      <ol>
-        {Feeds.length === 0
-          ? "Loading..."
-          : Feeds.map((f) =>
-              f.items.map((item) => (
-                <li>
-                  {item.title} : <a href={item.link}>Visit</a>
-                </li>
-              ))
-            )}
-      </ol>
-      <Footer />
+      <Navbar color="info" />
+      <div className={classes.root}> <div> {switchRoutes}</div>
+       <FeedDisplayer Feeds={Feeds}/>
+      </div>
+      {/* <Footer /> */}
     </div>
   );
 }
