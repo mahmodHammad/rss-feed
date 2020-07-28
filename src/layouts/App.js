@@ -49,7 +49,7 @@ export default function Admin({ ...rest }) {
 
   return (
     <div>
-      <Navbar />
+      <Navbar color="warning" />
       <div>{switchRoutes}</div>
       <ol>
         {Feeds.length === 0
