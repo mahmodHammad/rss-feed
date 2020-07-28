@@ -64,19 +64,20 @@ export default function Admin({ ...rest }) {
   const [Feeds, setFeeds] = useState([]);
   useEffect(() => {
     getfeed(providers[2][1]).then((feeds) => {
-      let updatedFeeds = [...Feeds, feeds];
+      let updatedFeeds = [...Feeds, ...feeds.items];
 
+      // console.log("CCCCCCCC",updatedFeeds.length)
       setFeeds(updatedFeeds);
-    }).catch(err=>{console.log("errror" , err)})
+    }).catch(err => { console.log("errror", err) })
   });
 
   return (
     <div>
       <Navbar color="info" />
       <div className={classes.root}> <div> {switchRoutes}</div>
-        <FeedDisplayer Feeds={Feeds} />
+        {Feeds.length ? <FeedDisplayer Feeds={Feeds} /> : "Loading..."}
+
       </div>
-      {/* <Footer /> */}
     </div>
   );
 }

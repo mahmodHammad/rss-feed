@@ -8,8 +8,10 @@ const useStyles = makeStyles((theme) => ({
         '& > *': {
             marginTop: theme.spacing(2),
         },
-        margin: "auto"
-    },
+        margin: "auto",
+        textAlign: "center",
+    }
+
 }));
 
 export default function PaginationRounded({ handlePagination, count }) {
