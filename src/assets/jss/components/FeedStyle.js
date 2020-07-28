@@ -24,7 +24,10 @@ const feedstyle = {
         fontSize: "14px",
         marginTop: "0",
         paddingTop: "10px",
-        marginBottom: "0"
+        marginBottom: "0",
+        lineClamp:4,
+        overflow:"hidden",
+        maxHeight:80
     },
     stats: {
         color: grayColor[0],

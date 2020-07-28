@@ -14,35 +14,49 @@ import CardHeader from "../Card/CardHeader.js";
 import CardBody from "../Card/CardBody.js";
 import CardFooter from "../Card/CardFooter.js";
 import styles from "../../assets/jss/components/FeedStyle"
+import moment from "moment"
 
 const useStyles = makeStyles(styles);
-
 export default function FeedDisplayer({ Feeds }) {
   const classes = useStyles();
 
+  console.log("feeds", Feeds)
 
+  function getFromNow(time) {
+    return moment(time).fromNow()
+
+  }
   return (
 
     <GridContainer>
-      <GridItem xs={12} sm={4} md={3}>
-        <Card chart>
-          <CardHeader color="info">
-            Hello world
-        </CardHeader>
-          <CardBody>
-            <h4 className={classes.cardTitle}>Daily Sales</h4>
-            <p className={classes.cardCategory}>
-            increase in today sales.
-          </p>
-          </CardBody>
-          <CardFooter chart>
-            <div className={classes.stats}>
-              <AccessTime /> updated 4 minutes ago
-          </div>
-          </CardFooter>
-        </Card>
-      </GridItem>
+      {Feeds.map((f) =>
+        f.items.map((item) => (
+
+          <GridItem xs={12} sm={4} md={3} xl={2} component="a" href={item.link} target="_blank">
+            <Card chart>
+              <CardHeader color="info" >
+                {item.title}
+              </CardHeader>
+              <CardBody>
+                <h4 className={classes.cardTitle}>Daily Sales</h4>
+                <p className={classes.cardCategory} dangerouslySetInnerHTML={{ __html: item.contentSnippet || item.contentSnippet }} >
+
+                </p>
+              </CardBody>
+              <CardFooter chart>
+                <div className={classes.stats}>
+                  <AccessTime /> Published {getFromNow(item.pubDate)}
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+
+        )))
+      }
+
     </GridContainer>
+
+
 
 
 
