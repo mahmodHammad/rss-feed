@@ -18,47 +18,47 @@ import Pagination from "../Pagination/Pagination"
 
 const useStyles = makeStyles(styles);
 export default function FeedDisplayer({ Feeds }) {
-  let initFeeds= Feeds.slice(0,20)
+
+  let initFeeds = Feeds.slice(0, 20)
   console.log(initFeeds)
   const [displayFeeds, setdisplayFeeds] = useState(initFeeds)
 
   function handlePagination(e, v) {
-    let paginated = Feeds.slice(v * 20, (v * 20) + 20)
+    let paginated = Feeds.slice(v * 15, (v * 15) + 15)
     setdisplayFeeds(paginated)
- }
+  }
   const classes = useStyles();
 
-  // console.log("feeds", Feeds)
 
   function getFromNow(time) {
     return moment(time).fromNow()
   }
 
   return (
-  <div>
-  <GridContainer>
-    {displayFeeds.map((item) =>
-      <GridItem xs={12} sm={4} md={3} xl={2} component="a" href={item.link} target="_blank">
-        <Card chart>
-          <CardHeader color="primary" >
-            {item.title}
-          </CardHeader>
-          <CardBody>
-            {/* <h4 className={classes.cardTitle}>Daily Sales</h4> */}
-            <p className={classes.cardCategory} dangerouslySetInnerHTML={{ __html: item.contentSnippet || item.contentSnippet }} ></p>
-          </CardBody>
-          <CardFooter chart>
-            <div className={classes.stats}>
-              <AccessTime /> Published: {getFromNow(item.pubDate)}
-            </div>
-          </CardFooter>
-        </Card>
-      </GridItem>
-    )
-    }
+    <div>
+      <GridContainer>
+        {displayFeeds.map((item) =>
+          <GridItem xs={12} sm={4} md={3} xl={2} component="a" href={item.link} target="_blank">
+            <Card chart>
+              <CardHeader color="primary" >
+                {item.title}
+              </CardHeader>
+              <CardBody>
+                {/* <h4 className={classes.cardTitle}>Daily Sales</h4> */}
+                <p className={classes.cardCategory} dangerouslySetInnerHTML={{ __html: item.contentSnippet || item.contentSnippet }} ></p>
+              </CardBody>
+              <CardFooter chart>
+                <div className={classes.stats}>
+                  <AccessTime /> Published: {getFromNow(item.pubDate)}
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+        )
+        }
 
-  </GridContainer>
-    <Pagination count={Feeds.length / 25} handlePagination={handlePagination} />
-  </div>
+      </GridContainer>
+      <Pagination count={Math.floor(Feeds.length / 15)} handlePagination={handlePagination} />
+    </div>
   );
 }

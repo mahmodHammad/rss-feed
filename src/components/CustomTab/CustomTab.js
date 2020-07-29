@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Button from "@material-ui/core/Button";
 // core components
 import Card from "../Card/Card";
 import CardBody from "../Card/CardBody.js";
@@ -23,11 +24,11 @@ export default function CustomTabs(props) {
     setValue(value);
   };
   const classes = useStyles();
-  const { headerColor, plainTabs, tabs, title, rtlActive } = props;
+  const { headerColor, plainTabs, tabs, title, handlProviderClicked} = props;
   const cardTitle = classNames({
     [classes.cardTitle]: true,
-    [classes.cardTitleRTL]: rtlActive
   });
+  console.log("props", props)
   return (
     <Card plain={plainTabs}>
       <CardHeader color={headerColor} plain={plainTabs}>
@@ -58,7 +59,7 @@ export default function CustomTabs(props) {
                   wrapper: classes.tabWrapper
                 }}
                 key={key}
-                label={prop.tabName}
+                label={prop.name}
                 {...icon}
               />
             );
@@ -66,12 +67,10 @@ export default function CustomTabs(props) {
         </Tabs>
       </CardHeader>
       <CardBody>
-        {tabs.map((prop, key) => {
-          if (key === value) {
-            return <div key={key}>{prop.tabContent}</div>;
-          }
-          return null;
-        })}
+          {tabs[value].value.map((prop, key) => {
+            return <Button className={classes.listButton} fullWidth variant="outlined" color="primary" onClick={()=>handlProviderClicked(prop.url)} key={key}>
+              {prop.name}</Button>;
+          })}
       </CardBody>
     </Card>
   );
@@ -89,11 +88,10 @@ CustomTabs.propTypes = {
   title: PropTypes.string,
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
-      tabName: PropTypes.string.isRequired,
+      tabName: PropTypes.string,
       tabIcon: PropTypes.object,
-      tabContent: PropTypes.node.isRequired
+      tabContent: PropTypes.node
     })
   ),
-  rtlActive: PropTypes.bool,
   plainTabs: PropTypes.bool
 };

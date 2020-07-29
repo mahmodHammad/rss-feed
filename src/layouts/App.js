@@ -45,29 +45,32 @@ function getfeed(url) {
     });
   });
 }
+
 const useStyles = makeStyles(styles);
 
-export default function Admin({ ...rest }) {
+export default function Admin() {
+  const [Feeds, setFeeds] = useState([]);
+  const [Loadin, setLoadin] = useState(false);
+
   const classes = useStyles();
 
-  const [providers, setproviders] = useState([
-    ["BBC business", "http://feeds.bbci.co.uk/news/business/rss.xml"],
-    ["BBC technology", "http://feeds.bbci.co.uk/news/technology/rss.xml"],
-    ["Yahoo news", "http://news.yahoo.com/rss/"],
-    ["CBN US news", "http://www.cbn.com/cbnnews/us/feed/"],
-    ["BBC UK news", "http://feeds.bbci.co.uk/news/rss.xml"],
-    ["The West Australian", "https://thewest.com.au/rss-feeds"],
-    ["WeatherZone list", "http://www.weatherzone.com.au/services/rss.jsp"],
-    ["CBN world news", "http://www.cbn.com/cbnnews/world/feed"],
-    ["BBC world news", "http://feeds.bbci.co.uk/news/world/rss.xml"],
-  ]);
+  function handlProviderClicked(url){
+    console.log("hey you" , url)
+    setFeeds([])
 
-  const [Feeds, setFeeds] = useState([]);
+      getfeed(url).then((feeds) => {
+        let updatedFeeds = [...Feeds, ...feeds.items];
+  
+        console.log("CCCCCCCC",updatedFeeds.length)
+        setFeeds(updatedFeeds);
+      }).catch(err => { console.log("errror", err) })
+  }
   useEffect(() => {
-    // getfeed(providers[2][1]).then((feeds) => {
+  
+    // getfeed("http://news.yahoo.com/rss/").then((feeds) => {
     //   let updatedFeeds = [...Feeds, ...feeds.items];
 
-    //   // console.log("CCCCCCCC",updatedFeeds.length)
+    //   console.log("CCCCCCCC",updatedFeeds.length)
     //   setFeeds(updatedFeeds);
     // }).catch(err => { console.log("errror", err) })
   });
@@ -77,7 +80,7 @@ export default function Admin({ ...rest }) {
       <Navbar color="primary" />
       <div className={classes.root}>
         {/* <div> {switchRoutes}</div> */}
-        <FeedBar />
+        <FeedBar handlProviderClicked={handlProviderClicked} />
         {Feeds.length ? <FeedDisplayer Feeds={Feeds} /> : "Loading..."}
 
       </div>
