@@ -37,7 +37,6 @@ export default function FeedDisplayer({ handlProviderClicked }) {
             ]
         },
         { name: "Weather", value: [{ name: "WeatherZone list", url: "http://www.weatherzone.com.au/services/rss.jsp" }] },
-        { name: "technology", value: [{ name: "BBC technology", url: "http://feeds.bbci.co.uk/news/technology/rss.xml" }] },
         { name: "business", value: [{ name: "BBC business", url: "http://feeds.bbci.co.uk/news/business/rss.xml" }] },
     ])
     function AddNewRss(category, name, url) {

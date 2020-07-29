@@ -41,10 +41,9 @@ export default function FeedDisplayer({ Feeds }) {
           <GridItem xs={12} sm={4} md={3} xl={2} component="a" href={item.link} target="_blank">
             <Card chart>
               <CardHeader color="primary" >
-                {item.title}
+               <span dangerouslySetInnerHTML={{ __html: item.title }}></span>
               </CardHeader>
               <CardBody>
-                {/* <h4 className={classes.cardTitle}>Daily Sales</h4> */}
                 <p className={classes.cardCategory} dangerouslySetInnerHTML={{ __html: item.contentSnippet || item.contentSnippet }} ></p>
               </CardBody>
               <CardFooter chart>
