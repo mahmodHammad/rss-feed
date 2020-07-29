@@ -11,7 +11,7 @@ import RSSParser from "rss-parser";
 import { makeStyles } from "@material-ui/core/styles";
 import FeedBar from "../components/Feed/FeedBar"
 
-
+import Snackbar from "../components/Snackbar/Snackbar"
 const hist = createBrowserHistory();
 
 let parser = new RSSParser();
@@ -51,105 +51,31 @@ const useStyles = makeStyles(styles);
 export default function Admin() {
   const [Feeds, setFeeds] = useState([]);
   const [Loadin, setLoadin] = useState(false);
+  const [err, seterr] = useState(false);
 
   const classes = useStyles();
 
   function handlProviderClicked(url){
-    console.log("hey you" , url)
+    setLoadin(true)
     setFeeds([])
 
       getfeed(url).then((feeds) => {
         let updatedFeeds = [...Feeds, ...feeds.items];
-  
-        console.log("CCCCCCCC",updatedFeeds.length)
         setFeeds(updatedFeeds);
-      }).catch(err => { console.log("errror", err) })
-  }
-  useEffect(() => {
-  
-    // getfeed("http://news.yahoo.com/rss/").then((feeds) => {
-    //   let updatedFeeds = [...Feeds, ...feeds.items];
+      setLoadin(false)
 
-    //   console.log("CCCCCCCC",updatedFeeds.length)
-    //   setFeeds(updatedFeeds);
-    // }).catch(err => { console.log("errror", err) })
-  });
+      }).catch(err => {seterr("Can not load the Feed right now") ;setLoadin(false)})
+  }
 
   return (
     <div>
       <Navbar color="primary" />
       <div className={classes.root}>
-        {/* <div> {switchRoutes}</div> */}
         <FeedBar handlProviderClicked={handlProviderClicked} />
-        {Feeds.length ? <FeedDisplayer Feeds={Feeds} /> : "Loading..."}
+        {Loadin?"Loading...": (Feeds.length ? <FeedDisplayer Feeds={Feeds} /> :null)}
 
       </div>
+      {err?<Snackbar message="Hello Hello Hello Hello Hello world" color="danger" open={true}/>:null}
     </div>
   );
 }
-
-
-// {
-//   content: 'As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents.'
-//   , contentSnippet: "As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents."
-//   , isoDate: "2020-07-27T18:30:00.000Z"
-//   , link: "http://www.cbn.com/api/urlredirect.aspx?u=http://www1.cbn.com/cbnnews/world/2020/july/they-threatened-our-children-chinese-christian-families-facing-separation-and-relentless-persecution"
-//   , pubDate: "2020-07-27T14:30:00-04:00"
-//   , title: "'They Threatened Our Children': Chinese Christian Families Facing Separation and Relentless Persecution"
-// }, {
-//   content: 'As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents.'
-//   , contentSnippet: "As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents."
-//   , isoDate: "2020-07-27T18:30:00.000Z"
-//   , link: "http://www.cbn.com/api/urlredirect.aspx?u=http://www1.cbn.com/cbnnews/world/2020/july/they-threatened-our-children-chinese-christian-families-facing-separation-and-relentless-persecution"
-//   , pubDate: "2020-07-27T14:30:00-04:00"
-//   , title: "'They Threatened Our Children': Chinese Christian Families Facing Separation and Relentless Persecution"
-// }, {
-//   content: 'As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents.'
-//   , contentSnippet: "As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents."
-//   , isoDate: "2020-07-27T18:30:00.000Z"
-//   , link: "http://www.cbn.com/api/urlredirect.aspx?u=http://www1.cbn.com/cbnnews/world/2020/july/they-threatened-our-children-chinese-christian-families-facing-separation-and-relentless-persecution"
-//   , pubDate: "2020-07-27T14:30:00-04:00"
-//   , title: "'They Threatened Our Children': Chinese Christian Families Facing Separation and Relentless Persecution"
-// }, {
-//   content: 'As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents.'
-//   , contentSnippet: "As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents."
-//   , isoDate: "2020-07-27T18:30:00.000Z"
-//   , link: "http://www.cbn.com/api/urlredirect.aspx?u=http://www1.cbn.com/cbnnews/world/2020/july/they-threatened-our-children-chinese-christian-families-facing-separation-and-relentless-persecution"
-//   , pubDate: "2020-07-27T14:30:00-04:00"
-//   , title: "'They Threatened Our Children': Chinese Christian Families Facing Separation and Relentless Persecution"
-// }, {
-//   content: 'As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents.'
-//   , contentSnippet: "As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents."
-//   , isoDate: "2020-07-27T18:30:00.000Z"
-//   , link: "http://www.cbn.com/api/urlredirect.aspx?u=http://www1.cbn.com/cbnnews/world/2020/july/they-threatened-our-children-chinese-christian-families-facing-separation-and-relentless-persecution"
-//   , pubDate: "2020-07-27T14:30:00-04:00"
-//   , title: "'They Threatened Our Children': Chinese Christian Families Facing Separation and Relentless Persecution"
-// }, {
-//   content: 'As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents.'
-//   , contentSnippet: "As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents."
-//   , isoDate: "2020-07-27T18:30:00.000Z"
-//   , link: "http://www.cbn.com/api/urlredirect.aspx?u=http://www1.cbn.com/cbnnews/world/2020/july/they-threatened-our-children-chinese-christian-families-facing-separation-and-relentless-persecution"
-//   , pubDate: "2020-07-27T14:30:00-04:00"
-//   , title: "'They Threatened Our Children': Chinese Christian Families Facing Separation and Relentless Persecution"
-// }, {
-//   content: 'As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents.'
-//   , contentSnippet: "As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents."
-//   , isoDate: "2020-07-27T18:30:00.000Z"
-//   , link: "http://www.cbn.com/api/urlredirect.aspx?u=http://www1.cbn.com/cbnnews/world/2020/july/they-threatened-our-children-chinese-christian-families-facing-separation-and-relentless-persecution"
-//   , pubDate: "2020-07-27T14:30:00-04:00"
-//   , title: "'They Threatened Our Children': Chinese Christian Families Facing Separation and Relentless Persecution"
-// }, {
-//   content: 'As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents.'
-//   , contentSnippet: "As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents."
-//   , isoDate: "2020-07-27T18:30:00.000Z"
-//   , link: "http://www.cbn.com/api/urlredirect.aspx?u=http://www1.cbn.com/cbnnews/world/2020/july/they-threatened-our-children-chinese-christian-families-facing-separation-and-relentless-persecution"
-//   , pubDate: "2020-07-27T14:30:00-04:00"
-//   , title: "'They Threatened Our Children': Chinese Christian Families Facing Separation and Relentless Persecution"
-// }, {
-//   content: 'As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents.'
-//   , contentSnippet: "As persecution against Christians in China escalates, leaders of the communist regime are now forbidding parents to enroll their children in faith-based schools and are sending adopted children back to their birth parents."
-//   , isoDate: "2020-07-27T18:30:00.000Z"
-//   , link: "http://www.cbn.com/api/urlredirect.aspx?u=http://www1.cbn.com/cbnnews/world/2020/july/they-threatened-our-children-chinese-christian-families-facing-separation-and-relentless-persecution"
-//   , pubDate: "2020-07-27T14:30:00-04:00"
-//   , title: "'They Threatened Our Children': Chinese Christian Families Facing Separation and Relentless Persecution"
-// }

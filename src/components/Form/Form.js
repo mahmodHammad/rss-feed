@@ -14,7 +14,7 @@ import CardFooter from "../Card/CardFooter.js";
 import styles from "../../assets/jss/components/FeedStyle"
 import CustomInput from "./CustomInput";
 import Button from "@material-ui/core/Button";
-
+import Snackbar from "../Snackbar/Snackbar"
 const useStyles = makeStyles(styles);
 export default function FeedDisplayer({ AddNewRss }) {
 
@@ -22,6 +22,8 @@ export default function FeedDisplayer({ AddNewRss }) {
     const [name, setname] = useState({ value: "", error: null })
     const [category, setcategory] = useState({ value: "", error: null })
     const [url, seturl] = useState({ value: "", error: null })
+    const [err, seterr] = useState(false)
+    
 
     function validateString(value) {
         // value is always string so i have to check using this weird approach that it's not a number
@@ -67,12 +69,13 @@ export default function FeedDisplayer({ AddNewRss }) {
 
     function handleSubmit() {
         if (name.error === null || url.error === null || category.error === null) {
-            console.log("empty fields is not allowed!")
+            seterr("No empty fields is allowed!")
         } else {
             if (!name.error && !url.error && !category.error) {
                 AddNewRss(category.value, name.value, url.value)
+                seterr(10)
             } else {
-                console.log("NOT valid!!!")
+                seterr("Please Fill All fields with correct data")
             }
         }
 
@@ -80,7 +83,9 @@ export default function FeedDisplayer({ AddNewRss }) {
 
     return (
         <GridItem xs={12} sm={12} md={6}>
+ 
 
+{err!==false?<Snackbar open={true} color={err===10?"success":"danger"} message={err===10?"The item got added to the list!":err}/>:null}
             <Card chart>
                 <CardHeader color="primary" >
                     Add your prefered RSS providers

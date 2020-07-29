@@ -10,6 +10,7 @@ import CustomTabs from "../CustomTab/CustomTab";
 import GridContainer from "../Grid/GridContainer";
 
 import CustomForm from "../Form/Form"
+import Snackbar from "../Snackbar/Snackbar"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +34,6 @@ export default function FeedDisplayer({ handlProviderClicked }) {
                 { name: "CBN World", url: "http://www.cbn.com/cbnnews/world/feed" },
                 { name: "BBC UK", url: "http://feeds.bbci.co.uk/news/rss.xml" },
                 { name: "BBC World", url: "http://feeds.bbci.co.uk/news/world/rss.xml" },
-                { name: "The West Australian", url: "https://thewest.com.au/rss-feeds" },
             ]
         },
         { name: "Weather", value: [{ name: "WeatherZone list", url: "http://www.weatherzone.com.au/services/rss.jsp" }] },
@@ -42,17 +42,15 @@ export default function FeedDisplayer({ handlProviderClicked }) {
     ])
     function AddNewRss(category, name, url) {
         let cloneCategories=[...Categories]
-        console.log(category)
-        console.log(name)
-        console.log(url)
-
         let existedCategory = Categories.findIndex(c => c.name.toLowerCase() === category.toLowerCase())
-        console.log(existedCategory)
-        console.log(cloneCategories)
-        if (existedCategory !== undefined) {
+ 
+        if (existedCategory !== -1) {
             cloneCategories[existedCategory].value.push({ name, url })
-            setCategories(cloneCategories)
+        }else{
+            let newCategory={name:category,value:[{name,url}]}
+            cloneCategories.push(newCategory)
         }
+        setCategories(cloneCategories)
     }
 
     return (
