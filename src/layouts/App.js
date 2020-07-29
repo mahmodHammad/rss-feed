@@ -9,13 +9,14 @@ import Navbar from "../components/Navbar/Navbar.js";
 import FeedDisplayer from "../components/Feed/FeedDisplayer";
 import RSSParser from "rss-parser";
 import { makeStyles } from "@material-ui/core/styles";
+import FeedBar from "../components/Feed/FeedBar"
+
+
 const hist = createBrowserHistory();
 
 let parser = new RSSParser();
 
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
-
-
 
 const styles = () => ({
   root: {
@@ -63,18 +64,20 @@ export default function Admin({ ...rest }) {
 
   const [Feeds, setFeeds] = useState([]);
   useEffect(() => {
-    getfeed(providers[2][1]).then((feeds) => {
-      let updatedFeeds = [...Feeds, ...feeds.items];
+    // getfeed(providers[2][1]).then((feeds) => {
+    //   let updatedFeeds = [...Feeds, ...feeds.items];
 
-      // console.log("CCCCCCCC",updatedFeeds.length)
-      setFeeds(updatedFeeds);
-    }).catch(err => { console.log("errror", err) })
+    //   // console.log("CCCCCCCC",updatedFeeds.length)
+    //   setFeeds(updatedFeeds);
+    // }).catch(err => { console.log("errror", err) })
   });
 
   return (
     <div>
       <Navbar color="info" />
-      <div className={classes.root}> <div> {switchRoutes}</div>
+      <div className={classes.root}>
+        {/* <div> {switchRoutes}</div> */}
+        <FeedBar />
         {Feeds.length ? <FeedDisplayer Feeds={Feeds} /> : "Loading..."}
 
       </div>
