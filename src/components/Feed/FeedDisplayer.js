@@ -40,7 +40,7 @@ export default function FeedDisplayer({ Feeds }) {
     {displayFeeds.map((item) =>
       <GridItem xs={12} sm={4} md={3} xl={2} component="a" href={item.link} target="_blank">
         <Card chart>
-          <CardHeader color="info" >
+          <CardHeader color="primary" >
             {item.title}
           </CardHeader>
           <CardBody>

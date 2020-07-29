@@ -35,22 +35,21 @@ export default function FeedDisplayer() {
                     headerColor="primary"
                     tabs={[
                         {
-                            tabName: "Bugs",
-                            tabIcon: BugReport,
+                            tabName: "News",
                             tabContent: (
                                 <h1>Hello</h1>
 
                             )
                         },
                         {
-                            tabName: "Website",
+                            tabName: "Tech",
                             tabIcon: Code,
                             tabContent: (
                                 <h1>Mother</h1>
                             )
                         },
                         {
-                            tabName: "Server",
+                            tabName: "Business",
                             tabIcon: Cloud,
                             tabContent: (
                                 <h1>Fucker</h1>

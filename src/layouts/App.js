@@ -74,7 +74,7 @@ export default function Admin({ ...rest }) {
 
   return (
     <div>
-      <Navbar color="info" />
+      <Navbar color="primary" />
       <div className={classes.root}>
         {/* <div> {switchRoutes}</div> */}
         <FeedBar />
