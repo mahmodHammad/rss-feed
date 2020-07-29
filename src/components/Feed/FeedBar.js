@@ -9,7 +9,7 @@ import GridItem from "../Grid/GridItem";
 import CustomTabs from "../CustomTab/CustomTab";
 import GridContainer from "../Grid/GridContainer";
 
-import FormRSS from "../Form/Form"
+import CustomForm from "../Form/Form"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,22 +40,35 @@ export default function FeedDisplayer({ handlProviderClicked }) {
         { name: "technology", value: [{ name: "BBC technology", url: "http://feeds.bbci.co.uk/news/technology/rss.xml" }] },
         { name: "business", value: [{ name: "BBC business", url: "http://feeds.bbci.co.uk/news/business/rss.xml" }] },
     ])
+    function AddNewRss(category, name, url) {
+        let cloneCategories=[...Categories]
+        console.log(category)
+        console.log(name)
+        console.log(url)
 
+        let existedCategory = Categories.findIndex(c => c.name.toLowerCase() === category.toLowerCase())
+        console.log(existedCategory)
+        console.log(cloneCategories)
+        if (existedCategory !== undefined) {
+            cloneCategories[existedCategory].value.push({ name, url })
+            setCategories(cloneCategories)
+        }
+    }
 
     return (
         <div>
-      <GridContainer>
+            <GridContainer>
 
-            <GridItem xs={12} sm={12} md={6}>
-                <CustomTabs
-                    title=""
-                    headerColor="primary"
-                    tabs={Categories}
-                    handlProviderClicked={handlProviderClicked}
-                />
-            </GridItem>
-           <FormRSS/>
-      </GridContainer>
+                <GridItem xs={12} sm={12} md={6}>
+                    <CustomTabs
+                        title=""
+                        headerColor="primary"
+                        tabs={Categories}
+                        handlProviderClicked={handlProviderClicked}
+                    />
+                </GridItem>
+                <CustomForm AddNewRss={AddNewRss} />
+            </GridContainer>
         </div>
     );
 }

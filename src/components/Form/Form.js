@@ -16,7 +16,7 @@ import CustomInput from "./CustomInput";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(styles);
-export default function FeedDisplayer({ Feeds }) {
+export default function FeedDisplayer({ AddNewRss }) {
 
 
     const [name, setname] = useState({ value: "", error: null })
@@ -63,12 +63,21 @@ export default function FeedDisplayer({ Feeds }) {
             seturl({ value, error })
 
         }
-
-        // console.log(id,value)
-        console.log("name", name)
-        console.log("category", category)
-        console.log("url", url)
     }
+
+    function handleSubmit() {
+        if (name.error === null || url.error === null || category.error === null) {
+            console.log("empty fields is not allowed!")
+        } else {
+            if (!name.error && !url.error && !category.error) {
+                AddNewRss(category.value, name.value, url.value)
+            } else {
+                console.log("NOT valid!!!")
+            }
+        }
+
+    }
+
     return (
         <GridItem xs={12} sm={12} md={6}>
 
@@ -121,7 +130,7 @@ export default function FeedDisplayer({ Feeds }) {
                             disabled: false
                         }} />
 
-                    <Button fullWidth variant="outlined" color="primary">submit</Button>
+                    <Button onClick={handleSubmit} fullWidth variant="outlined" color="primary">submit</Button>
                 </CardBody>
 
             </Card>
