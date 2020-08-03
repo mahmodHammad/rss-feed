@@ -24,4 +24,16 @@ function validateURL(str) {
     return pattern.test(str);
 }
 
-export { validateString, validateURL }
+
+function handelError(id, isSuccess = false) {
+    let fieldName
+    if (id === "category") fieldName = category
+    else if (id === "name") fieldName = name
+    else if (id === "url") fieldName = url
+    else return null
+    if (isSuccess) return fieldName.error !== null && !fieldName.error
+    else return fieldName.error !== null && fieldName.error
+}
+
+
+export { validateString, validateURL, handelError }

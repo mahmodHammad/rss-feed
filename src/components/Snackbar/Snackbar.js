@@ -26,9 +26,6 @@ export default function Snackbar(props) {
     const classes = useStyles();
     const { message, color, close, icon, rtlActive } = props;
     var action = [];
-    const messageClasses = classNames({
-        [classes.iconMessage]: icon !== undefined
-    });
     if (close !== undefined) {
         action = [
             <IconButton
@@ -44,11 +41,7 @@ export default function Snackbar(props) {
     }
     return (
         <Snack
-            anchorOrigin={{
-                vertical: "bottom",
-                horizontal:
-                    "left"
-            }}
+            anchorOrigin={{vertical: "bottom",horizontal:"left"}}
             open={Open}
             message={
                 <div>
@@ -61,7 +54,7 @@ export default function Snackbar(props) {
                     >
                         <Close className={classes.close} />
                     </IconButton>
-                    <span className={messageClasses}>{message}</span>
+                    <span>{message}</span>
                 </div>
             }
             action={action}
@@ -79,8 +72,5 @@ export default function Snackbar(props) {
 Snackbar.propTypes = {
     message: PropTypes.node.isRequired,
     color: PropTypes.oneOf(["info", "success", "warning", "danger", "primary"]),
-    close: PropTypes.bool,
-    icon: PropTypes.object,
-    open: PropTypes.bool,
-    closeNotification: PropTypes.func
+    message:PropTypes.string,
 };

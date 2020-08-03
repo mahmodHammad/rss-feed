@@ -9,7 +9,7 @@ import CustomInput from "./CustomInput";
 import Button from "@material-ui/core/Button";
 import Snackbar from "../Snackbar/Snackbar"
 
-import {validateURL,validateString} from "./helper"
+import { validateURL, validateString, handelError } from "./helper"
 
 
 export default function FeedDisplayer({ AddNewRss }) {
@@ -48,6 +48,7 @@ export default function FeedDisplayer({ AddNewRss }) {
         }
     }
 
+
     return (
         <GridItem xs={12} sm={12} md={6}>
             <Card chart>
@@ -55,35 +56,17 @@ export default function FeedDisplayer({ AddNewRss }) {
                     Add your prefered RSS providers
                 </CardHeader>
                 <CardBody>
-                    <CustomInput
+                    {["category", "name", "url"].map(field => <CustomInput
                         onChange={handleInputChange}
-                        labelText="Category"
-                        id="category"
+                        labelText={field}
+                        id={field}
                         formControlProps={{ fullWidth: true }}
                         inputProps={{ disabled: false }}
-                        error={category.error !== null && category.error}
-                        success={category.error !== null && !category.error}
-                    />
-                    <CustomInput
-                        onChange={handleInputChange}
-                        labelText="Provider Name"
-                        id="name"
-                        formControlProps={{ fullWidth: true }}
-                        error={name.error !== null && name.error}
-                        success={name.error !== null && !name.error}
-                        inputProps={{ disabled: false }} />
-                    <CustomInput
-                        onChange={handleInputChange}
-                        labelText="URL"
-                        id="url"
-                        formControlProps={{ fullWidth: true }}
-                        error={url.error !== null && url.error}
-                        success={url.error !== null && !url.error}
-                        inputProps={{ disabled: false }} />
-
+                        error={handelError(field, false)}
+                        success={handelError(field, true)}
+                    />)}
                     <Button onClick={handleSubmit} fullWidth variant="outlined" color="primary">submit</Button>
                 </CardBody>
-
             </Card>
             {err !== false ? <Snackbar open={true} color={err === 10 ? "success" : "danger"} message={err === 10 ? "The item got added to the list!" : err} /> : null}
         </GridItem>
