@@ -1,28 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
 
-import BugReport from "@material-ui/icons/BugReport";
-import Code from "@material-ui/icons/Code";
-import Cloud from "@material-ui/icons/Cloud";
 // core components
 import GridItem from "../Grid/GridItem";
 import CustomTabs from "../CustomTab/CustomTab";
 import GridContainer from "../Grid/GridContainer";
-
 import CustomForm from "../Form/Form"
-import Snackbar from "../Snackbar/Snackbar"
 
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& > *': {
-            marginTop: theme.spacing(2),
-        },
-        margin: "auto",
-        textAlign: "center",
-    }
-
-}));
 
 export default function FeedDisplayer({ handlProviderClicked }) {
 
@@ -38,15 +21,16 @@ export default function FeedDisplayer({ handlProviderClicked }) {
         },
         { name: "Weather", value: [{ name: "WeatherZone list", url: "http://www.weatherzone.com.au/services/rss.jsp" }] },
         { name: "business", value: [{ name: "BBC business", url: "http://feeds.bbci.co.uk/news/business/rss.xml" }] },
+        { name: "Tech", value: [{ name: "Ahmed Alfi ", url: "https://alfy.me/feed.xml" }] },
     ])
     function AddNewRss(category, name, url) {
-        let cloneCategories=[...Categories]
+        let cloneCategories = [...Categories]
         let existedCategory = Categories.findIndex(c => c.name.toLowerCase() === category.toLowerCase())
- 
+
         if (existedCategory !== -1) {
             cloneCategories[existedCategory].value.push({ name, url })
-        }else{
-            let newCategory={name:category,value:[{name,url}]}
+        } else {
+            let newCategory = { name: category, value: [{ name, url }] }
             cloneCategories.push(newCategory)
         }
         setCategories(cloneCategories)

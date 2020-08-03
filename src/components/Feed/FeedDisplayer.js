@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 // Icons 
@@ -53,8 +53,7 @@ export default function FeedDisplayer({ Feeds }) {
               </CardFooter>
             </Card>
           </GridItem>
-        )
-        }
+        )}
 
       </GridContainer>
       <Pagination count={Math.floor(Feeds.length / 15)} handlePagination={handlePagination} />

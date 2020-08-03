@@ -9,7 +9,7 @@ import {
     dangerColor,
     whiteColor,
     grayColor
-  } from "assets/jss/material-dashboard-react.js";
+  } from "../global";
   
   const headerStyle = () => ({
     appBar: {
