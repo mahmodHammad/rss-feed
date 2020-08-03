@@ -1,34 +1,31 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import moment from "moment"
+import styles from "../../assets/jss/components/FeedStyle"
 
 // Icons 
 import AccessTime from "@material-ui/icons/AccessTime";
 // core components
-
 import GridItem from "../Grid/GridItem";
 import GridContainer from "../Grid/GridContainer";
-
 import Card from "../Card/Card";
 import CardHeader from "../Card/CardHeader.js";
 import CardBody from "../Card/CardBody.js";
 import CardFooter from "../Card/CardFooter.js";
-import styles from "../../assets/jss/components/FeedStyle"
-import moment from "moment"
 import Pagination from "../Pagination/Pagination"
 
 const useStyles = makeStyles(styles);
 export default function FeedDisplayer({ Feeds }) {
+  const classes = useStyles();
 
+  // for the pagination
   let initFeeds = Feeds.slice(0, 20)
-  console.log(initFeeds)
   const [displayFeeds, setdisplayFeeds] = useState(initFeeds)
 
   function handlePagination(e, v) {
     let paginated = Feeds.slice(v * 15, (v * 15) + 15)
     setdisplayFeeds(paginated)
   }
-  const classes = useStyles();
-
 
   function getFromNow(time) {
     return moment(time).fromNow()

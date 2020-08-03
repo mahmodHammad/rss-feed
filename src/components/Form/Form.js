@@ -9,7 +9,7 @@ import CustomInput from "./CustomInput";
 import Button from "@material-ui/core/Button";
 import Snackbar from "../Snackbar/Snackbar"
 
-import { validateURL, validateString, handelError } from "./helper"
+import { validateURL, validateString } from "./helper"
 
 
 export default function FeedDisplayer({ AddNewRss }) {
@@ -33,6 +33,16 @@ export default function FeedDisplayer({ AddNewRss }) {
             seturl({ value, error })
         }
     }
+    
+    function handelError(id, isSuccess = false) {
+        let fieldName
+        if (id === "category") fieldName = category
+        else if (id === "name") fieldName = name
+        else if (id === "url") fieldName = url
+        else return null
+        if (isSuccess) return fieldName.error !== null && !fieldName.error
+        else return fieldName.error !== null && fieldName.error
+    }
 
     function handleSubmit() {
         if (name.error === null || url.error === null || category.error === null) {
@@ -48,7 +58,6 @@ export default function FeedDisplayer({ AddNewRss }) {
         }
     }
 
-
     return (
         <GridItem xs={12} sm={12} md={6}>
             <Card chart>
@@ -56,6 +65,7 @@ export default function FeedDisplayer({ AddNewRss }) {
                     Add your prefered RSS providers
                 </CardHeader>
                 <CardBody>
+                    {/* take care! you should fill the array with a state name, this could be written better */}
                     {["category", "name", "url"].map(field => <CustomInput
                         onChange={handleInputChange}
                         labelText={field}
