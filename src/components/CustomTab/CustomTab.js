@@ -28,7 +28,6 @@ export default function CustomTabs(props) {
   const cardTitle = classNames({
     [classes.cardTitle]: true,
   });
-  console.log("props", props)
   return (
     <Card plain={plainTabs}>
       <CardHeader color={headerColor} plain={plainTabs}>

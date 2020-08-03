@@ -67,6 +67,7 @@ export default function FeedDisplayer({ AddNewRss }) {
                 <CardBody>
                     {/* take care! you should fill the array with a state name, this could be written better */}
                     {["category", "name", "url"].map(field => <CustomInput
+                        key={field}
                         onChange={handleInputChange}
                         labelText={field}
                         id={field}

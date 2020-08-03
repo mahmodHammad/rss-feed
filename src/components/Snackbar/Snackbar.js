@@ -24,7 +24,7 @@ export default function Snackbar(props) {
     }
 
     const classes = useStyles();
-    const { message, color, close, icon, rtlActive } = props;
+    const { message, color, close, rtlActive } = props;
     var action = [];
     if (close !== undefined) {
         action = [
@@ -72,5 +72,4 @@ export default function Snackbar(props) {
 Snackbar.propTypes = {
     message: PropTypes.node.isRequired,
     color: PropTypes.oneOf(["info", "success", "warning", "danger", "primary"]),
-    message:PropTypes.string,
 };
