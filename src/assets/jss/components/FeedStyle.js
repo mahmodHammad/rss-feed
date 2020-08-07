@@ -27,6 +27,7 @@ const feedstyle = {
         marginBottom: "0",
         lineClamp:4,
         overflow:"hidden",
+        minHeight:60,
         maxHeight:80
     },
     stats: {

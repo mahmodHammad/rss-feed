@@ -18,7 +18,7 @@ const useStyles = makeStyles(styles);
 export default function Header(props) {
     const classes = useStyles();
     function makeBrand() {
-      var name= "Mahmoud Hammad";
+      var name= "RSS Reader";
     
       return name;
     }
@@ -31,7 +31,7 @@ export default function Header(props) {
         <Toolbar className={classes.container}>
           <div className={classes.flex}>
             {/* Here we create navbar brand, based on route name */}
-            <Button color="transparent" href="#" className={classes.title}>
+            <Button color="transparent" href="https://github.com/mahmodHammad/rss-feed" className={classes.title}>
               {makeBrand()}
             </Button>
           </div>
